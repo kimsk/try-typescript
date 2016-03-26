@@ -1,0 +1,11 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "outDir": "./js/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "noImplicitUseStrict": true,
+        "module": "commonjs",
+        "target": "es5"
+    }
+}
