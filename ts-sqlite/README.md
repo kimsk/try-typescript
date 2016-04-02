@@ -1,5 +1,6 @@
 ### [Typings](https://github.com/typings/typings)
 `typings install node --ambient --save`
+
 `typings install sqlite3 --ambient --save`
 
 ### [Sqlite3](https://github.com/mapbox/node-sqlite3)
