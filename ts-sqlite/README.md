@@ -30,3 +30,24 @@
 
     fs.createReadStream(__dirname+'/../fs_read.csv')
         .pipe(parser);
+
+
+### [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
+
+`npm install bluebird --save`
+
+`typins install bluebird --ambient --save`
+
+    let parse = Promise.promisify<any, string, any>(require('csv-parse'));
+    let readFileAsync = Promise.promisify<string, string, string>(fs.readFile);
+
+    readFileAsync(__dirname + '/../fs_read.csv', 'utf-8')
+      .then((value) => {
+        return parse(value, { delimiter: ',' });
+      })
+      .then((data) => {
+        return {
+          cols: data[0],
+          records: data.slice(1)
+        }
+      });
