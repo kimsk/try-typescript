@@ -8,6 +8,7 @@
     },
     "files": [
         "./typings/main.d.ts",
-        "app.ts"
+        "app.ts",
+        "parse-promise.ts"
     ]
 }
