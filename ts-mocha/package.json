@@ -1,0 +1,16 @@
+{
+  "name": "ts-mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests.ts --require ts-node/register *.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "ts-node": "^0.7.1"
+  }
+}
