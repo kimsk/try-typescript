@@ -19,6 +19,14 @@ interface IContainerState extends ISize {
   widgets: __React.ReactElement<IWidgetProps>[]
 }
 
+const blockStyle = {
+      height: 100,
+      width: 200,
+      background: 'red',
+      border: '1px solid orange',
+      borderRadius: '4px'
+    };
+
 class Container extends React.Component<IContainerProps, IContainerState> {
   constructor(props:IContainerProps){
     super(props);
@@ -111,14 +119,6 @@ class Widget extends React.Component<IWidgetProps, any> {
   }
   
   render(){
-    const blockStyle = {
-      height: 100,
-      width: 200,
-      background: 'white',
-      border: '1px solid orange',
-      borderRadius: '4px'
-    };
-      
     return (
       <div 
           style={blockStyle}
@@ -132,6 +132,21 @@ class Widget extends React.Component<IWidgetProps, any> {
   }
 }
 
+let dragify = (c:__React.Component<any, any>) => {
+  return c;
+}
+
+
+class PC extends React.Component<any, any>{
+  render(){
+    return (<div style={blockStyle}>PC</div>);
+  }
+}
+
+const PF = () => {
+    return (<div style={blockStyle}>PF</div>);
+}
+
 
 let widgets:__React.ReactElement<IWidgetProps>[] = [];
 
@@ -140,5 +155,7 @@ ReactDOM.render(
                       <Container height={500} width={800} widgets={widgets}/> 
                       <Widget height={200} width={200} render={() => <div>C1</div>}/>
                       <Widget height={200} width={200} render={() => <div>C2</div>}/>
+                      <PC/>
+                      <PF/>
                   </div>
                  , document.getElementById('react'));
