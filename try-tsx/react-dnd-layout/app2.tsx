@@ -25,11 +25,10 @@ let wrap = (C:__React.ComponentClass<IPaneProps>) => class Pane extends React.Co
   } 
   
   render(){
-    const { height, width } = this.props;
     return(
       <div ref='pane'
             onMouseOver={this.mouseOver}>
-        <C height={height} width={width}/>
+        <C {...this.props}/>
       </div>
     );
   }
