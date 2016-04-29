@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^2.2.3",
+    "jquery-ui": "^1.10.5",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "underscore": "^1.8.3"
