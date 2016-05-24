@@ -2,21 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from 'jquery';
 import { SizeAndPosition } from './shared';
-import { Widgetify } from './Widget';
 import { DragBar } from './DragBar';
 export { LeftRightPanelLayout };
-
-class C extends React.Component<any, any>{
-    render(){
-        return (
-          <div>Component</div>  
-        );
-    }
-}
-
-const C1 = Widgetify(C, 'c1');
-const C2 = Widgetify(C, 'c2');
-const C3 = Widgetify(C, 'c3');
 
 interface LeftRightPanelLayoutState {
     height: number,
@@ -26,7 +13,12 @@ interface LeftRightPanelLayoutState {
     vDragBar: SizeAndPosition
 }
 
-class LeftRightPanelLayout extends React.Component<any, LeftRightPanelLayoutState>{
+interface LeftRightPanelLayoutProps {
+    left: __React.ReactElement<any>,
+    right: __React.ReactElement<any>,
+}
+
+class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, LeftRightPanelLayoutState>{
     constructor(props){
         super(props);
         
@@ -80,7 +72,8 @@ class LeftRightPanelLayout extends React.Component<any, LeftRightPanelLayoutStat
               width: width
           }}>
             <div>
-                <C1 x={leftWidget.x} y={leftWidget.y} width={leftWidget.width} height={leftWidget.height}/>
+                {this.props.left}
+                {/*<C1 x={leftWidget.x} y={leftWidget.y} width={leftWidget.width} height={leftWidget.height}/>*/}
             </div>
             <DragBar 
                 x={vDragBar.x} y={vDragBar.y} height={vDragBar.height} width={vDragBar.width}
@@ -88,7 +81,8 @@ class LeftRightPanelLayout extends React.Component<any, LeftRightPanelLayoutStat
                 dragging={this.dragging}
             />
             <div>
-                <C2 x={rightWidget.x} y={rightWidget.y} width={rightWidget.width} height={rightWidget.height}/>
+                {this.props.right}
+                {/*<C2 x={rightWidget.x} y={rightWidget.y} width={rightWidget.width} height={rightWidget.height}/>*/}
             </div>
           </div>  
         );
