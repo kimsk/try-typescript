@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-grid-layout": "^0.12.4"
   },
   "devDependencies": {
     "source-map-loader": "^0.1.5",
