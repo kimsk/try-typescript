@@ -14,14 +14,29 @@ class C extends React.Component<any, any>{
 
 const C1 = Widgetify(C, 'c1');
 const C2 = Widgetify(C, 'c2');
-const C3 = Widgetify(C, 'c3');
 
+// initial size & positions
 const height = $(window).innerHeight();
 const width = $(window).innerWidth();
 const leftWidth = width/2;
 const rightWidth = width/2;
 
-ReactDOM.render(<LeftRightPanelLayout 
-    left={<C1 x={0} y={0} width={leftWidth} height={height}/>}
-    right={<C2 x={leftWidth} y={0} width={rightWidth} height={height}/>}/>  
+ReactDOM.render(<LeftRightPanelLayout
+    height={height}
+    width={width}
+    left={C1}
+    leftProps={{
+        x:0,
+        y:0,
+        width:leftWidth,
+        height:height
+    }}
+    right={C2}
+    rightProps={{
+        x:leftWidth,
+        y:0,
+        width:rightWidth,
+        height:height
+    }} 
+    />  
     ,document.getElementById("react"));

@@ -8,81 +8,90 @@ export { LeftRightPanelLayout };
 interface LeftRightPanelLayoutState {
     height: number,
     width: number,
-    leftWidget: SizeAndPosition,
-    rightWidget: SizeAndPosition,
-    vDragBar: SizeAndPosition
+    left: __React.ComponentClass<any>,
+    right: __React.ComponentClass<any>,
+    leftState: SizeAndPosition,
+    rightState: SizeAndPosition,
+    vDragBarState: SizeAndPosition
 }
 
 interface LeftRightPanelLayoutProps {
-    left: __React.ReactElement<any>,
-    right: __React.ReactElement<any>,
+    height: number,
+    width: number,
+    left: __React.ComponentClass<any>,
+    leftProps: any,
+    right: __React.ComponentClass<any>,
+    rightProps: any
 }
 
 class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, LeftRightPanelLayoutState>{
+       
     constructor(props){
         super(props);
         
-        const height = $(window).innerHeight();
-        const width = $(window).innerWidth();
-        const leftWidth = width/2;
-        const rightWidth = width/2;
-        
         this.state = {
-            height: height,
-            width: width,
-            leftWidget: {
-                x: 0,
-                y: 0,
-                width: leftWidth,
-                height: height
+            height: this.props.height,
+            width: this.props.width,
+            left: this.props.left,
+            right: this.props.right,
+            leftState: {
+                x: this.props.leftProps.x,
+                y: this.props.leftProps.y,
+                width: this.props.leftProps.width,
+                height: this.props.leftProps.height
             },
-            rightWidget: {
-                x: leftWidth,
-                y: 0,
-                width: rightWidth,
-                height: height
+            rightState: {
+                x: this.props.rightProps.x,
+                y: this.props.rightProps.y,
+                width: this.props.rightProps.width,
+                height: this.props.rightProps.height
             },
-            vDragBar: {
-                x: leftWidth,
+            vDragBarState: {
+                x: this.props.leftProps.width,
                 y: 0,
-                height: height,
+                height: this.props.height,
                 width: 5
             }
         };
     }
     
-    dragging = ({top, left}) => {
-        const { height, width, leftWidget, rightWidget, vDragBar } = this.state;
+    dragging = (x:number, y:number) => {
+        const { height, width
+            , left, right
+            , leftState, rightState, vDragBarState } = this.state;
 
         const newState = {
             height: height,
             width: width,
-            leftWidget: $.extend(leftWidget, { width: left}),
-            rightWidget: $.extend(rightWidget, { x: left, width: width - left  }),
-            vDragBar: $.extend(vDragBar, { x: left })
+            left: left,
+            right: right,
+            leftState: $.extend(leftState, { width: x}),
+            rightState: $.extend(rightState, { x: x, width: width - x  }),
+            vDragBarState: $.extend(vDragBarState, { x: x })
         };
         this.setState(newState);
     }    
     
     render(){
-        const { height, width, leftWidget, rightWidget, vDragBar } = this.state;
+        const { height, width, leftState, rightState, vDragBarState } = this.state;
+        const Left = this.state.left;
+        const Right = this.state.right;
+
         return(
           <div style={{
               height: height,
               width: width
           }}>
             <div>
-                {this.props.left}
-                {/*<C1 x={leftWidget.x} y={leftWidget.y} width={leftWidget.width} height={leftWidget.height}/>*/}
+                <Left {...leftState}/>
             </div>
             <DragBar 
-                x={vDragBar.x} y={vDragBar.y} height={vDragBar.height} width={vDragBar.width}
+                {...vDragBarState}
                 axis='x'
                 dragging={this.dragging}
             />
             <div>
-                {this.props.right}
-                {/*<C2 x={rightWidget.x} y={rightWidget.y} width={rightWidget.width} height={rightWidget.height}/>*/}
+                <Right {...rightState}/>
             </div>
           </div>  
         );

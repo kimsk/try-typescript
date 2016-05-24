@@ -14,11 +14,11 @@ class DragBar extends React.Component<any, any> {
         start: this.props.dragStart,
         drag: (e) => {
           let position = elem.position();
-          this.props.dragging(position);
+          this.props.dragging(position.left, position.top);
         },
         stop: () => {
           let position = elem.position();
-          this.props.dragging(position);
+          this.props.dragging(position.left, position.top);
         }
       });
   }
