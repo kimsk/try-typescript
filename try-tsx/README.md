@@ -20,8 +20,8 @@ npm link typescript
 ```
 
 ```shell
-typings install --ambient --save react
-typings install --ambient --save react-dom
+typings install --global --save dt~react
+typings install --global --save dt~react-dom
 ```
 
 **tsconfig.json**
@@ -37,7 +37,7 @@ typings install --ambient --save react-dom
         "jsx": "react"
     },
     "files": [
-        "./typings/main.d.ts",
+        "./typings/index.d.ts",
         "./src/components/Hello.tsx",
         "./src/index.tsx"
     ]
