@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react"
+    },
+    "files": [
+        "./typings/index.d.ts",
+        "./src/shared.ts",       
+        "./src/LeftRightPanelLayout.tsx",
+        "./src/Widget.tsx",
+        "./src/DragBar.tsx",
+        "./src/index.tsx"
+    ]
+}
