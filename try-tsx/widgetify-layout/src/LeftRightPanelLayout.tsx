@@ -76,14 +76,15 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
         const { height, width, leftState, rightState, vDragBarState } = this.state;
         const Left = this.state.left;
         const Right = this.state.right;
-
+        const leftProps = $.extend(this.props.leftProps, leftState);
+        const rightProps = $.extend(this.props.rightProps, rightState);
         return(
           <div style={{
               height: height,
               width: width
           }}>
             <div>
-                <Left {...leftState}/>
+                <Left {...leftProps}/>
             </div>
             <DragBar 
                 {...vDragBarState}
@@ -91,7 +92,7 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
                 dragging={this.dragging}
             />
             <div>
-                <Right {...rightState}/>
+                <Right {...rightProps}/>
             </div>
           </div>  
         );
