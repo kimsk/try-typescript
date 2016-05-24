@@ -1,4 +1,4 @@
-#### [TypeScript/React/Webpack Quick Start](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/quick-start/react-webpack.md)
+#### [TypeScript/React/Webpack Quick Start](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/React%20%26%20Webpack.md)
 
 ```shell
 npm init
