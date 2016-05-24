@@ -1,6 +1,12 @@
 #### [TypeScript/React/Webpack Quick Start](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/quick-start/react-webpack.md)
 
 ```shell
+npm init
+tsc --init
+typings init
+```
+
+```shell
 npm install -g typescript typings webpack
 ```
 
