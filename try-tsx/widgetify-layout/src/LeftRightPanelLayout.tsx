@@ -55,18 +55,48 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
         };
     }
     
-    dragging = (x:number, y:number) => {
+    dragNDrop = (event, ui) => {        
+        if(ui.draggable.context.className.indexOf('drag-bar') >= 0){
+            console.log('drag-bar');
+            return;
+        }
+        
+        console.log('dragNDrop');        
         const { height, width
             , left, right
             , leftState, rightState, vDragBarState } = this.state;
+        
+        const leftX = leftState.x;
+        const leftWidth = leftState.width;
+        const rightX = rightState.x;
+        const rightWidth = rightState.width;
+        
+        const newState = {
+            height: height,
+            width: width,
+            left: left,
+            right: right,
+            leftState: $.extend(leftState, { x: rightX, width: rightWidth }),
+            rightState: $.extend(rightState, { x: leftX, width: leftWidth }),
+            vDragBarState: vDragBarState
+        };
+        this.setState(newState);        
+    }
+    
+    resizing = (x:number, y:number) => {
+        const { height, width
+            , left, right
+            , leftState, rightState, vDragBarState } = this.state;
+            
+        const isNotSwapped = leftState.x < rightState.x;
 
         const newState = {
             height: height,
             width: width,
             left: left,
             right: right,
-            leftState: $.extend(leftState, { width: x}),
-            rightState: $.extend(rightState, { x: x, width: width - x  }),
+            leftState: $.extend(leftState, isNotSwapped?{ width: x }:{ x: x, width: width - x  }),
+            rightState: $.extend(rightState, !isNotSwapped?{ width: x }:{ x: x, width: width - x  }),
             vDragBarState: $.extend(vDragBarState, { x: x })
         };
         this.setState(newState);
@@ -76,24 +106,20 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
         const { height, width, leftState, rightState, vDragBarState } = this.state;
         const Left = this.state.left;
         const Right = this.state.right;
-        const leftProps = $.extend(this.props.leftProps, leftState);
-        const rightProps = $.extend(this.props.rightProps, rightState);
+        const leftProps = $.extend(this.props.leftProps, leftState, { dragNDrop: this.dragNDrop});
+        const rightProps = $.extend(this.props.rightProps, rightState, { dragNDrop: this.dragNDrop});
         return(
           <div style={{
               height: height,
               width: width
           }}>
-            <div>
-                <Left {...leftProps}/>
-            </div>
-            <DragBar 
+            <Left {...leftProps}/>
+            <Right {...rightProps}/>
+            <DragBar
                 {...vDragBarState}
                 axis='x'
-                dragging={this.dragging}
+                dragging={this.resizing}
             />
-            <div>
-                <Right {...rightProps}/>
-            </div>
           </div>  
         );
     }

@@ -12,7 +12,7 @@ class DragBar extends React.Component<any, any> {
         axis: this.props.axis,
         cursor: "move",
         start: this.props.dragStart,
-        drag: (e) => {
+        drag: () => {
           let position = elem.position();
           this.props.dragging(position.left, position.top);
         },
@@ -42,6 +42,7 @@ class DragBar extends React.Component<any, any> {
     return (
       <div
         ref='drag-bar'
+        className='drag-bar'
         onMouseOver={this.mouseOver}
         style={dragBarStyle}></div>
     );

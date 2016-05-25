@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
 import * as _ from 'underscore';
 require('jquery-ui/draggable');
+require('jquery-ui/droppable');
 
 let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => class Widget extends React.Component<any, any>{
     static WIDGET_STYLE = {
@@ -12,8 +13,7 @@ let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => 
         alignItems: 'flex-start',
         alignContent: 'flex-start',
         position: 'absolute',
-        borderRadius: 4,
-        border: 'black solid 1px'
+        borderRadius: 4
     }
 
     static TOOLBAR_STYLE = {
@@ -41,15 +41,20 @@ let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => 
         elem.draggable({
             cursor: 'move',
             handle: Widget.DRAGGABLE_TOOLBAR_SELECTOR,
-            revert: true,
             snap: true,
             start: () => {
-                (ref as HTMLDivElement).style.opacity = '0.5';
+                elem.css({opacity: 0.5 });
             },
             stop: () => {
-                (ref as HTMLDivElement).style.opacity = '1';
+                // also set top/left via jQuery to restrict draggable position
+                elem.css({opacity: 1, top: this.props.y, left: this.props.x });
             }
         });
+        
+        elem.droppable({
+            hoverClass: 'drop-hover',
+            drop: this.props.dragNDrop
+        });        
     }
 
     render() {
@@ -67,7 +72,7 @@ let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => 
 
         return (
             <div ref='widget'
-                style={widgetStyle} >
+                style={widgetStyle}>
                 <div ref='toolbar'
                     className={Widget.DRAGGABLE_TOOLBAR}
                     style={Widget.TOOLBAR_STYLE}
@@ -76,6 +81,7 @@ let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => 
                 </div>
                 <div ref='content'
                     style={Widget.CONTENT_STYLE}>
+                    <span>{this.props.x}</span>
                     <C {...contentProps}/>
                 </div>
             </div>
