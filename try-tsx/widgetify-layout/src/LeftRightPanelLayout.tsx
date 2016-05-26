@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from 'jquery';
+import * as _ from 'underscore';
 import { SizeAndPosition } from './shared';
 import { DragBar } from './DragBar';
 export { LeftRightPanelLayout };
@@ -83,7 +84,7 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
         this.setState(newState);        
     }
     
-    resizing = (x:number, y:number) => {
+    resizing = _.debounce((x:number, y:number) => {
         const { height, width
             , left, right
             , leftState, rightState, vDragBarState } = this.state;
@@ -100,7 +101,7 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
             vDragBarState: $.extend(vDragBarState, { x: x })
         };
         this.setState(newState);
-    }    
+    }, 0)    
     
     render(){
         const { height, width, leftState, rightState, vDragBarState } = this.state;
