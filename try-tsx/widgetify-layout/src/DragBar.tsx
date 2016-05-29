@@ -4,14 +4,23 @@ import * as $ from 'jquery';
 import * as _ from 'underscore';
 require('jquery-ui/draggable');
 
-class DragBar extends React.Component<any, any> {
+interface IDragBarProps {
+    dragging: any,
+    height: number,
+    width: number,
+    x: number,
+    y: number,
+    vertical: boolean
+}
+
+class DragBar extends React.Component<IDragBarProps, any> {
+  getCursor = (vertical: boolean) => vertical ? 'col-resize' : 'row-resize'
   componentDidMount() {
     let elem = $(this.refs['drag-bar']);
     elem
       .draggable({
-        axis: this.props.axis,
-        cursor: "move",
-        start: this.props.dragStart,
+        axis: this.props.vertical ? 'x' : 'y',
+        cursor: this.getCursor(this.props.vertical),
         drag: () => {
           let position = elem.position();
           this.props.dragging(position.left, position.top);
@@ -25,7 +34,7 @@ class DragBar extends React.Component<any, any> {
 
   mouseOver = () => {
     let dragBarDiv = this.refs['drag-bar'] as HTMLDivElement;
-    dragBarDiv.style.cursor = 'move';
+    dragBarDiv.style.cursor = this.getCursor(this.props.vertical);
   }
 
   render() {

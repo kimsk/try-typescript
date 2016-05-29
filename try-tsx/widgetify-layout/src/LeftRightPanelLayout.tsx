@@ -26,10 +26,10 @@ interface LeftRightPanelLayoutProps {
 }
 
 class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, LeftRightPanelLayoutState>{
-       
+
     constructor(props){
         super(props);
-        
+
         this.state = {
             height: this.props.height,
             width: this.props.width,
@@ -55,23 +55,23 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
             }
         };
     }
-    
-    dragNDrop = (event, ui) => {        
+
+    dragNDrop = (event, ui) => {
         if(ui.draggable.context.className.indexOf('drag-bar') >= 0){
             console.log('drag-bar');
             return;
         }
-        
-        console.log('dragNDrop');        
+
+        console.log('dragNDrop');
         const { height, width
             , left, right
             , leftState, rightState, vDragBarState } = this.state;
-        
+
         const leftX = leftState.x;
         const leftWidth = leftState.width;
         const rightX = rightState.x;
         const rightWidth = rightState.width;
-        
+
         const newState = {
             height: height,
             width: width,
@@ -81,14 +81,14 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
             rightState: $.extend(rightState, { x: leftX, width: leftWidth }),
             vDragBarState: vDragBarState
         };
-        this.setState(newState);        
+        this.setState(newState);
     }
-    
+
     resizing = _.debounce((x:number, y:number) => {
         const { height, width
             , left, right
             , leftState, rightState, vDragBarState } = this.state;
-            
+
         const isNotSwapped = leftState.x < rightState.x;
 
         const newState = {
@@ -101,8 +101,8 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
             vDragBarState: $.extend(vDragBarState, { x: x })
         };
         this.setState(newState);
-    }, 0)    
-    
+    }, 0)
+
     render(){
         const { height, width, leftState, rightState, vDragBarState } = this.state;
         const Left = this.state.left;
@@ -118,10 +118,10 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
             <Right {...rightProps}/>
             <DragBar
                 {...vDragBarState}
-                axis='x'
+                vertical={true}
                 dragging={this.resizing}
             />
-          </div>  
+          </div>
         );
     }
 }
