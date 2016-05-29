@@ -50,11 +50,11 @@ let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => 
                 elem.css({opacity: 1, top: this.props.y, left: this.props.x });
             }
         });
-        
+
         elem.droppable({
             hoverClass: 'drop-hover',
             drop: this.props.dragNDrop
-        });        
+        });
     }
 
     render() {
@@ -81,7 +81,8 @@ let Widgetify = (C: __React.ComponentClass<any>, widgetTitle: string = null) => 
                 </div>
                 <div ref='content'
                     style={Widget.CONTENT_STYLE}>
-                    <span>{this.props.x}</span>
+                    <div>{this.props.x}, {this.props.y}</div>
+                    <div>{this.props.height}, {this.props.width}</div>
                     <C {...contentProps}/>
                 </div>
             </div>

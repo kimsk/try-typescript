@@ -103,6 +103,46 @@ class LeftRightPanelLayout extends React.Component<LeftRightPanelLayoutProps, Le
         this.setState(newState);
     }, 0)
 
+    resizePanel = _.debounce(() => {
+        console.log('resize');
+        const height = $(window).innerHeight();
+        const width = $(window).innerWidth();
+
+        const { left, right, leftState, rightState, vDragBarState } = this.state;
+
+        const isNotSwapped = leftState.x < rightState.x;
+
+        const newState = {
+            height: height,
+            width: width,
+            left: left,
+            right: right,
+            leftState: $.extend(leftState, { height: height },
+            isNotSwapped?{ width: leftState.width }:{ width: width - rightState.width  }),
+            rightState: $.extend(rightState, { height: height },
+            !isNotSwapped?{ width: width - leftState.width }:{ width: width - leftState.width }),
+            vDragBarState: $.extend(vDragBarState, isNotSwapped?
+            {
+                height: height,
+                x: leftState.width }
+            :{
+                height: height,
+                x: rightState.width
+                })
+        };
+        this.setState(newState);
+    }, 100);
+
+    componentDidMount(){
+        $(window).resize(this.resizePanel);
+        console.log('componentDidMount');
+    }
+
+    componentWillUnmount(){
+        $(window).off('resize', this.resizePanel);
+        console.log('componentWillUnmount');
+    }
+
     render(){
         const { height, width, leftState, rightState, vDragBarState } = this.state;
         const Left = this.state.left;
