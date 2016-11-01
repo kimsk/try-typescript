@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome against localhost, with sourcemaps",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8080",
+      "sourceMaps": true,
+      "webRoot": "${workspaceRoot}",
+      "runtimeExecutable": "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"
+    },
+    {
+      "name": "Attach to Chrome, with sourcemaps",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "sourceMaps": true,
+      "webRoot": "${workspaceRoot}"
+    },
+    {
+      "name": "Node2 Launch Program",
+      "type": "node2",
+      "request": "launch",
+      "program": "${workspaceRoot}/HelloWorld.js",
+      "cwd": "${workspaceRoot}",
+      "outFiles": [],
+      "sourceMaps": true
+    },
+    {
+      "name": "Node2 Attach to Process",
+      "type": "node2",
+      "request": "attach",
+      "port": 9229,
+      "outFiles": [],
+      "sourceMaps": true
+    }
+  ]
+}
