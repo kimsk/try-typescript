@@ -2,7 +2,7 @@
 
 `"/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"  --remote-debugging-port=9222`
 
-- [launch.json]()
+- [launch.json](https://github.com/kimsk/try-typescript/blob/master/vscode-debugging/.vscode/launch.json)
 - [Visual Studio Code Debugging](https://code.visualstudio.com/docs/editor/debugging)
 - [Debug your JavaScript code running in Google Chrome from VS Code.](https://github.com/Microsoft/vscode-chrome-debug)
 - [Node.js debugging with Chrome DevTools (in parallel with browser JavaScript)](https://blog.hospodarets.com/nodejs-debugging-in-chrome-devtools)
