@@ -21,6 +21,9 @@ document.getElementById('btn').onclick = () => {
   let input = <HTMLInputElement> document.getElementById('input')
   worker.postMessage(input.value)
 }
-
+let i = 0
+setInterval(() => {
+  document.getElementById('count').innerText = (i++).toString()
+}, 100)
 
 console.log('main done');
