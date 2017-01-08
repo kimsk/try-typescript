@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "server": "node ./dist/server.bundle.js"
+  },
   "dependencies": {
     "@types/immutable": "^3.8.7",
     "@types/react": "^0.14.55",
